@@ -1,5 +1,8 @@
 package com.oauthdemo;
 
+import java.util.Arrays;
+import java.util.Random;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -21,7 +24,17 @@ public class MembersOnlyController {
 		}
 		
 		// if the user is logged in, proceed as normal.
-		return new ModelAndView("secrets");
+		ModelAndView mv = new ModelAndView("secrets");
+		mv.addObject("joke", Arrays.asList("Chuck Norris can kill two stones with one bird.",
+				"Giraffes were created when Chuck Norris uppercutted a horse.",
+				"Chuck Norris beat the sun in a staring contest.",
+				"Chuck Norris is the reason Waldo is hiding.",
+				"Chuck Norris makes onions cry.",
+				"Chuck Norris can rub two pieces of fire together and make wood.")
+		.get(new Random().nextInt(6)));
+		
+		
+		return mv;
 	}
 
 }
